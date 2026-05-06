@@ -1,0 +1,21 @@
+site_name: Dr. Chunk
+site_description: Extract chunking and codec metadata from HDF5/NetCDF4 files
+repo_url: https://github.com/betolink/drchunk
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: indigo
+  features:
+    - content.code.copy
+    - navigation.instant
+
+nav:
+  - Quickstart: index.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets

@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drchunk"
+version = "0.1.0"
+description = "Extract chunking and codec metadata from HDF5/NetCDF4 files"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Dr. Chunk Team"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "dask",
+    "h5py",
+    "pandas",
+    "numpy",
+    "panel",
+    "holoviews",
+    "hvplot",
+    "bokeh",
+]
+
+[project.optional-dependencies]
+remote = ["earthaccess"]
+dev = ["ruff", "pytest", "mkdocs-material"]
+
+[project.scripts]
+drchunk = "drchunk.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["drchunk*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # flake8-simplify
+    "ANN", # flake8-annotations
+]
+ignore = ["E501"]  # line length handled by formatter
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ANN"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["drchunk"]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: tests that hit CMR for real (requires earthaccess credentials)",
+]
+testpaths = ["tests"]
